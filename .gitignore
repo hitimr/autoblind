@@ -2,8 +2,10 @@
 pyenv/
 
 
-# Fodlers starting with .
+# temp and hidden Files with .
 .*/
+*~*
+
 
 
 # files containing secrets
