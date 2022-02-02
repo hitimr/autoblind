@@ -4,3 +4,7 @@ pyenv/
 
 # Fodlers starting with .
 .*/
+
+
+# files containing secrets
+wifi_credentials.json
