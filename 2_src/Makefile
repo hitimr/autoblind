@@ -14,6 +14,5 @@ upload:
 	ampy -p $(USB_PORT) put $(ESP_DIR)/main.py main.py
 	ampy -p $(USB_PORT) put $(ESP_DIR)/wifi_credentials.json wifi_credentials.json
 
-test:
-	ampy -p $(USB_PORT) put $(ESP_DIR)/main.py main.py
-	ampy -p $(USB_PORT) ls
+make run:
+	ampy -p /dev/ttyUSB0 run esp32/main.py
