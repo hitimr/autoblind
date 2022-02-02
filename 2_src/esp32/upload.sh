@@ -1,0 +1,1 @@
+ampy -p /dev/ttyUSB0 put main.py main.py
