@@ -8,7 +8,10 @@ flash:
 upload:
 	ampy -p ${USB_PORT} put ${ESP_DIR}/boot.py boot.py
 	ampy -p ${USB_PORT} put ${ESP_DIR}/main.py main.py
+	ampy -p ${USB_PORT} put ${ESP_DIR}/sr_74hc595_spi.py sr_74hc595_spi.py
+	ampy -p ${USB_PORT} put ${ESP_DIR}/spi_test.py spi_test.py
 	ampy -p ${USB_PORT} put ${ESP_DIR}/wifi_credentials.json wifi_credentials.json
 
 make run:
-	ampy -p ${USB_PORT} run ${ESP_DIR}/main.py
+	ampy -p ${USB_PORT} put ${ESP_DIR}/spi_test.py spi_test.py 
+	ampy -p ${USB_PORT} run ${ESP_DIR}/spi_test.py
