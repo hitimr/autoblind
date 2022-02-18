@@ -1,24 +1,30 @@
-import json
-import network
-import socket
+from machine import Pin, SPI
+from sr_74hc595_spi import SR
+import time
 
-# Connect to WiFi
-sta_if = network.WLAN(network.STA_IF)
-ap_if = network.WLAN(network.AP_IF)
+spi = SPI(1, 10000000, sck=Pin(14), mosi=Pin(13))    # hSPI
 
-sta_if.active(True)  # Activate wifi station interface
-ap_if.active(False)  # Disable access point interface
+rclk = Pin(12, Pin.OUT)
 
-wifi_credentials = json.load(open("wifi_credentials.json"))
+#oe = Pin(33, Pin.OUT, value=0)    # low enables output -> connect oe to GND
+#srclr = Pin(32, Pin.OUT, value=1) # pulsing low clears data -> 
 
-print('connecting to network...')
-if not sta_if.isconnected():
+sr = SR(spi, rclk) # chain of 2 shift registers
 
-    sta_if.connect(wifi_credentials["ssid"], wifi_credentials["password"])
-    while not sta_if.isconnected():
-        pass
-    print("Connection established")
-else:
-    print("Already connected")
 
-print('network config:', sta_if.ifconfig())
+sr.pin(0,1) 
+
+time.sleep_ms(100)
+sr.pin(1, 1)
+time.sleep_ms(100)
+sr.pin(2, 0)
+
+exit()
+while(True):
+    sr.pin(0,1) 
+    time.sleep_ms(1000)
+    sr.pin(0,0) 
+    time.sleep_ms(1000)
+
+
+
